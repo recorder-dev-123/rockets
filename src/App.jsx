@@ -11,6 +11,7 @@ import {
   History,
   ArrowRight,
 } from 'lucide-react'
+import { Page, CardGrid } from './components/Layout.jsx'
 
 const facts = [
   {
@@ -50,91 +51,65 @@ const timeline = [
   { year: '2015', text: 'An orbital-class booster lands vertically for the first time.' },
 ]
 
+function MoreLink({ href, children }) {
+  return (
+    <a className="more-link" href={href}>
+      {children} <ArrowRight size={16} />
+    </a>
+  )
+}
+
 export default function App() {
   return (
-    <>
-      <header className="nav">
-        <div className="container nav-inner">
-          <span className="logo">
-            <Rocket size={22} /> Rockets
-          </span>
-          <nav>
-            <a href="#how">How they work</a>
-            <a href="#missions">Missions</a>
-            <a href="#history">History</a>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section className="hero">
-          <div className="container">
-            <div className="hero-icon">
-              <Rocket size={56} strokeWidth={1.5} />
-            </div>
-            <h1>Reach for orbit</h1>
-            <p className="lead">
-              A short guide to the machines that carry us beyond the sky — how they fly,
-              where they go, and how we got here.
-            </p>
-            <a className="button" href="#how">
-              Start exploring <ArrowRight size={18} />
-            </a>
-          </div>
-        </section>
-
-        <section id="how" className="section">
-          <div className="container">
-            <h2>How rockets work</h2>
-            <div className="grid">
-              {facts.map(({ icon: Icon, title, text }) => (
-                <article key={title} className="card">
-                  <Icon className="card-icon" size={28} />
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="missions" className="section alt">
-          <div className="container">
-            <h2>Where they take us</h2>
-            <div className="grid">
-              {missions.map(({ icon: Icon, title, text }) => (
-                <article key={title} className="card">
-                  <Icon className="card-icon" size={28} />
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="history" className="section">
-          <div className="container">
-            <h2>
-              <History size={26} /> A brief history
-            </h2>
-            <ol className="timeline">
-              {timeline.map(({ year, text }) => (
-                <li key={year}>
-                  <span className="year">{year}</span>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      </main>
-
-      <footer className="footer">
+    <Page>
+      <section className="hero">
         <div className="container">
-          <Rocket size={16} /> Rockets — keep looking up.
+          <div className="hero-icon">
+            <Rocket size={56} strokeWidth={1.5} />
+          </div>
+          <h1>Reach for orbit</h1>
+          <p className="lead">
+            A short guide to the machines that carry us beyond the sky — how they fly,
+            where they go, and how we got here.
+          </p>
+          <a className="button" href="/how-rockets-work">
+            Start exploring <ArrowRight size={18} />
+          </a>
         </div>
-      </footer>
-    </>
+      </section>
+
+      <section id="how" className="section">
+        <div className="container">
+          <h2>How rockets work</h2>
+          <CardGrid items={facts} />
+          <MoreLink href="/how-rockets-work">Dig into the physics</MoreLink>
+        </div>
+      </section>
+
+      <section id="missions" className="section alt">
+        <div className="container">
+          <h2>Where they take us</h2>
+          <CardGrid items={missions} />
+          <MoreLink href="/missions">Explore missions</MoreLink>
+        </div>
+      </section>
+
+      <section id="history" className="section">
+        <div className="container">
+          <h2>
+            <History size={26} /> A brief history
+          </h2>
+          <ol className="timeline">
+            {timeline.map(({ year, text }) => (
+              <li key={year}>
+                <span className="year">{year}</span>
+                <p>{text}</p>
+              </li>
+            ))}
+          </ol>
+          <MoreLink href="/history">See the full timeline</MoreLink>
+        </div>
+      </section>
+    </Page>
   )
 }
