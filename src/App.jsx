@@ -67,7 +67,7 @@ export default function App() {
           <div className="hero-icon">
             <Rocket size={56} strokeWidth={1.5} />
           </div>
-          <h1>Reach for orbit</h1>
+          <h1>Reach for all orbit</h1>
           <p className="lead">
             A short guide to the machines that carry us beyond the sky — how they fly,
             where they go, and how we got here.
